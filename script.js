@@ -1,19 +1,30 @@
 const weekNumber = 1;
 const prompt = "Moon";
-const projectName = "Pomodoro Timer";
 
-const weekLine = `Week ${weekNumber} - ${prompt} - ${projectName}`;
-const weekLineEl = document.getElementById("week-line");
-weekLineEl.textContent = weekLine;
+function displayWeekLine(projectName) {
+  const weekLine = `Week ${weekNumber} - ${prompt} - ${projectName}`;
+  const weekLineEl = document.getElementById("week-line");
+  weekLineEl.textContent = weekLine;
+}
 
-// ------
-const projectNameEl = document.getElementById("project-name-input");
-projectNameEl.addEventListener("input", () => {
-  const trimmedProjectName = projectNameEl.value.trim();
-
+function getDisplayedProjectName(projectName) {
+  const trimmedProjectName = projectName.trim();
   if (trimmedProjectName === "") {
-    console.log("not valide");
-  } else if (typeof trimmedProjectName === "string") {
-    console.log("valide");
+    projectName = "Placeholder test";
   }
+  return projectName;
+}
+
+//  First load
+const projectNameEl = document.getElementById("project-name-input");
+let projectName = projectNameEl.value;
+
+projectName = getDisplayedProjectName(projectName);
+displayWeekLine(projectName);
+
+// Project Name input management
+projectNameEl.addEventListener("input", () => {
+  projectName = projectNameEl.value;
+  getDisplayedProjectName(projectName);
+  displayWeekLine(projectName);
 });
