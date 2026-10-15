@@ -5,37 +5,22 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <form class="border-2 border-solid m-8 p-8">
-    <div id="week-1" class="flex flex-col gap-8">
-      <input type="text" id="project-name-input-1" class="border-2 border-solid" placeholder="Name of your project" />
+  <div id="page" class="grid grid-cols-2 gap-4">
+    <form id="form" class="border-2 border-solid m-6 p-6 flex flex-col gap-2">
+      <h1>Your challenge</h1>
 
-      <select id="project-language-select-1">
-        <option value="Language">Select your main target language</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="React">React</option>
-        <option value="TypeScript">TypeScript</option>
-        <option value="Tailwind">Tailwind</option>
-      </select>
+      <div id="pseudo" class="my-8 flex flex-row">
+        <input type="text" placeholder="your-pseudo" class="border-2 border-solid" />
+        <p>'s 2026 CodeTober challenge</p>
+      </div>
+
+      <div id="weeks-form"></div>
+    </form>
+
+    <div id="card" class="border-2 border-solid m-6 p-6">
+      <h1 class="text-orange-500 font-bold">CodeTober 2026</h1>
+      <p id="week-line-1"></p>
+      <p id="week-line-2"></p>
     </div>
-  </form>
-
-    <form class="border-2 border-solid m-8 p-8">
-    <div id="week-2" class="flex flex-col gap-8">
-      <input type="text" id="project-name-input-2" class="border-2 border-solid" placeholder="Name of your project" />
-
-      <select id="project-language-select-2">
-        <option value="Language">Select your main target language</option>
-        <option value="JavaScript">JavaScript</option>
-        <option value="React">React</option>
-        <option value="TypeScript">TypeScript</option>
-        <option value="Tailwind">Tailwind</option>
-      </select>
-    </div>
-  </form>
-
-  <div id="card" class="border-2 border-solid m-8 p-8">
-    <h1 class="text-orange-500 font-bold">CodeTober 2026</h1>
-    <p id="week-line-1"></p>
-    <p id="week-line-2"></p>
   </div>
 </body>
