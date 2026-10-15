@@ -26,6 +26,16 @@ function buildForm() {
   formEl.innerHTML = fullForm;
 }
 
+function buildCard() {
+  let fullCard = "";
+  for (let week = 1; week <= 4; week++) {
+    fullCard += `<p id="week-line-${week}"></p>`;
+  }
+
+  const cardEl = document.getElementById("weeks-card");
+  cardEl.innerHTML = fullCard;
+}
+
 function displayWeekLine(weekNumber, projectName, projectLanguage) {
   const weekLine = `Week ${weekNumber} - ${prompt} - ${projectName} - ${projectLanguage}`;
   const weekLineEl = document.getElementById(`week-line-${weekNumber}`);
@@ -61,6 +71,7 @@ function updateCard() {
 // First load
 // 1 - build
 buildForm();
+buildCard();
 
 // 2 - Update
 updateCard();
