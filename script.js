@@ -1,24 +1,47 @@
 // Initial values
-const prompt = "Moon";
+const prompts = ["Moon", "Ghost", "Candy", "Witch", "Pumpkin", "Bat", "Broom", "Spice", "Night", "Cat"];
+let currentPrompts = [];
+
+function pickPrompt(prompts) {
+  let index = Math.floor(Math.random() * prompts.length);
+  return prompts[index];
+}
+
+function pickAllPrompts(prompts) {
+  for (let week = 1; week <= 4; week++) {
+    let currentPrompt = "";
+    currentPrompt = pickPrompt(prompts);
+
+    while (currentPrompts.includes(currentPrompt)) {
+      currentPrompt = pickPrompt(prompts);
+    }
+    currentPrompts.push(currentPrompt);
+  }
+
+  return currentPrompts;
+}
 
 function buildForm() {
   let fullForm = "";
   for (let week = 1; week <= 4; week++) {
     fullForm += `
-  <div id="week-form-${week}" class="border-2 border-solid p-2 my-8">
-      <h2>Week ${week}</h2>
-      <div class="flex flex-row my-2 gap-8 ">
-        <input type="text" id="project-name-input-${week}" class="border-2 border-solid" placeholder="Project name" />
+        <div id="week-form-${week}" class="border-2 border-solid p-2 my-8">
+            <div class="flex flex-row justify-between">
+                <h2>Week ${week}</h2>
+                <button>🎲 ${currentPrompts[week - 1]}</button>
+            </div>
 
-        <select id="project-language-select-${week}" class="border-2 border-solid">
-            <option value="Language">Select your main target language</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="React">React</option>
-            <option value="TypeScript">TypeScript</option>
-            <option value="Tailwind">Tailwind</option>
-        </select>
-      </div>
-    </div>
+            <div class="flex flex-row my-2 gap-8 ">
+            <input type="text" id="project-name-input-${week}" class="border-2 border-solid" placeholder="Project name" />
+            <select id="project-language-select-${week}" class="border-2 border-solid">
+                <option value="Language">Select your main target language</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="React">React</option>
+                <option value="TypeScript">TypeScript</option>
+                <option value="Tailwind">Tailwind</option>
+            </select>
+            </div>
+        </div>
     `;
   }
 
@@ -37,7 +60,7 @@ function buildCard() {
 }
 
 function displayWeekLine(weekNumber, projectName, projectLanguage) {
-  const weekLine = `Week ${weekNumber} - ${prompt} - ${projectName} - ${projectLanguage}`;
+  const weekLine = `Week ${weekNumber} - ${currentPrompts[weekNumber - 1]} - ${projectName} - ${projectLanguage}`;
   const weekLineEl = document.getElementById(`week-line-${weekNumber}`);
   weekLineEl.textContent = weekLine;
 }
@@ -70,6 +93,7 @@ function updateCard() {
 
 // First load
 // 1 - build
+pickAllPrompts(prompts);
 buildForm();
 buildCard();
 
