@@ -21,7 +21,7 @@ function pickAllPrompts(prompts) {
   return currentPrompts;
 }
 
-function pickOnePrompt(index) {
+function pickOnePrompt(prompts, index) {
   let replacementPrompt = pickPrompt(prompts);
 
   while (currentPrompts.includes(replacementPrompt)) {
@@ -108,7 +108,7 @@ function updateCard() {
     });
 
     promptBtnEl.addEventListener("click", () => {
-      pickOnePrompt(week - 1);
+      pickOnePrompt(prompts, week - 1);
       updateWeekLine(week, projectNameEl, projectLanguageEl);
       updatePromptButton(week);
     });
