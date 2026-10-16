@@ -9,14 +9,26 @@ function pickPrompt(prompts) {
 
 function pickAllPrompts(prompts) {
   for (let week = 1; week <= 4; week++) {
-    let currentPrompt = "";
-    currentPrompt = pickPrompt(prompts);
+    let currentPrompt = pickPrompt(prompts);
 
     while (currentPrompts.includes(currentPrompt)) {
       currentPrompt = pickPrompt(prompts);
     }
+
     currentPrompts.push(currentPrompt);
   }
+
+  return currentPrompts;
+}
+
+function pickOnePrompt(index) {
+  let replacementPrompt = pickPrompt(prompts);
+
+  while (currentPrompts.includes(replacementPrompt)) {
+    replacementPrompt = pickPrompt(prompts);
+  }
+
+  currentPrompts[index] = replacementPrompt;
 
   return currentPrompts;
 }
@@ -28,7 +40,7 @@ function buildForm() {
         <div id="week-form-${week}" class="border-2 border-solid p-2 my-8">
             <div class="flex flex-row justify-between">
                 <h2>Week ${week}</h2>
-                <button>🎲 ${currentPrompts[week - 1]}</button>
+                <button id="prompt-btn-${week}" type="button">🎲 ${currentPrompts[week - 1]}</button>
             </div>
 
             <div class="flex flex-row my-2 gap-8 ">
@@ -75,16 +87,30 @@ function updateWeekLine(weekNumber, projectNameEl, projectLanguageEl) {
   let projectLanguage = projectLanguageEl.value;
   displayWeekLine(weekNumber, projectName, projectLanguage);
 }
+
+function updatePromptButton(week) {
+  const promptBtnEl = document.getElementById(`prompt-btn-${week}`);
+  promptBtnEl.textContent = "🎲 " + currentPrompts[week - 1];
+}
+
 function updateCard() {
   for (let week = 1; week <= 4; week++) {
     const projectNameEl = document.getElementById(`project-name-input-${week}`);
     const projectLanguageEl = document.getElementById(`project-language-select-${week}`);
+    const promptBtnEl = document.getElementById(`prompt-btn-${week}`);
 
     projectNameEl.addEventListener("input", () => {
       updateWeekLine(week, projectNameEl, projectLanguageEl);
     });
+
     projectLanguageEl.addEventListener("change", () => {
       updateWeekLine(week, projectNameEl, projectLanguageEl);
+    });
+
+    promptBtnEl.addEventListener("click", () => {
+      pickOnePrompt(week - 1);
+      updateWeekLine(week, projectNameEl, projectLanguageEl);
+      updatePromptButton(week);
     });
 
     updateWeekLine(week, projectNameEl, projectLanguageEl);
