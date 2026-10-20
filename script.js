@@ -33,7 +33,7 @@ function pickOnePrompt(prompts, index) {
   return currentPrompts;
 }
 
-function buildForm() {
+function renderForm() {
   let fullForm = "";
   for (let week = 1; week <= 4; week++) {
     fullForm += `
@@ -63,7 +63,7 @@ function buildForm() {
   formEl.innerHTML = fullForm;
 }
 
-function buildCard() {
+function renderCard() {
   let fullCard = "";
   for (let week = 1; week <= 4; week++) {
     fullCard += `<p id="week-line-${week}"></p>`;
@@ -71,6 +71,29 @@ function buildCard() {
 
   const cardEl = document.getElementById("weeks-card");
   cardEl.innerHTML = fullCard;
+}
+
+// Weeks
+let weeks = [];
+
+function createWeeks() {
+  for (let i = 1; i <= 4; i++) {
+    const week = {
+      number: i,
+      prompt: currentPrompts[i - 1],
+      project: "Great project",
+      language: "Cool language",
+      repo: "Amazing Url",
+    };
+    weeks.push(week);
+  }
+}
+
+function displayWeeks(weeks) {
+  weeks.forEach((week, index) => {
+    const weekLineEl = document.getElementById(`week-line-${index + 1}`);
+    weekLineEl.textContent = `${week.number} - ${week.prompt} - ${week.project} - ${week.language} - ${week.repo}`;
+  });
 }
 
 function displayWeekLine(weekNumber, projectName, projectLanguage, projectUrl) {
@@ -131,10 +154,13 @@ function updateCard() {
 }
 
 // First load
-// 1 - build
+// 1 - render
 pickAllPrompts(prompts);
-buildForm();
-buildCard();
+createWeeks();
+
+renderForm();
+renderCard();
+displayWeeks(weeks);
 
 // 2 - Update
-updateCard();
+// updateCard();
