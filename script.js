@@ -1,4 +1,4 @@
-// Initial values
+// Prompts
 const prompts = ["Moon", "Ghost", "Candy", "Witch", "Pumpkin", "Bat", "Broom", "Spice", "Night", "Cat"];
 let currentPrompts = [];
 
@@ -46,12 +46,14 @@ function buildForm() {
             <div class="flex flex-row my-2 gap-8 ">
             <input type="text" id="project-name-input-${week}" class="border-2 border-solid" placeholder="Project name" />
             <select id="project-language-select-${week}" class="border-2 border-solid">
-                <option value="Language">Select your main target language</option>
+                <option value="Language">Target language</option>
                 <option value="JavaScript">JavaScript</option>
                 <option value="React">React</option>
                 <option value="TypeScript">TypeScript</option>
                 <option value="Tailwind">Tailwind</option>
             </select>
+
+            <input type="text" id="repo-url-input-${week}" class="border-2 border-solid" placeholder="Repo URL" />
             </div>
         </div>
     `;
@@ -71,8 +73,8 @@ function buildCard() {
   cardEl.innerHTML = fullCard;
 }
 
-function displayWeekLine(weekNumber, projectName, projectLanguage) {
-  const weekLine = `Week ${weekNumber} - ${currentPrompts[weekNumber - 1]} - ${projectName} - ${projectLanguage}`;
+function displayWeekLine(weekNumber, projectName, projectLanguage, projectUrl) {
+  const weekLine = `Week ${weekNumber} - ${currentPrompts[weekNumber - 1]} - ${projectName} - ${projectLanguage} - ${projectUrl}`;
   const weekLineEl = document.getElementById(`week-line-${weekNumber}`);
   weekLineEl.textContent = weekLine;
 }
@@ -82,10 +84,16 @@ function getDisplayedProjectName(projectName) {
   return trimmedProjectName === "" ? "Project name..." : projectName;
 }
 
-function updateWeekLine(weekNumber, projectNameEl, projectLanguageEl) {
+function getRepoUrl(repoUrl) {
+  const trimmedRepoUrl = repoUrl.trim();
+  return trimmedRepoUrl === "" ? "Repo url..." : repoUrl;
+}
+
+function updateWeekLine(weekNumber, projectNameEl, projectLanguageEl, repoUrlEl) {
   let projectName = getDisplayedProjectName(projectNameEl.value);
   let projectLanguage = projectLanguageEl.value;
-  displayWeekLine(weekNumber, projectName, projectLanguage);
+  let repoUrl = getRepoUrl(repoUrlEl.value);
+  displayWeekLine(weekNumber, projectName, projectLanguage, repoUrl);
 }
 
 function updatePromptButton(week) {
@@ -97,23 +105,28 @@ function updateCard() {
   for (let week = 1; week <= 4; week++) {
     const projectNameEl = document.getElementById(`project-name-input-${week}`);
     const projectLanguageEl = document.getElementById(`project-language-select-${week}`);
+    const repoUrlEl = document.getElementById(`repo-url-input-${week}`);
     const promptBtnEl = document.getElementById(`prompt-btn-${week}`);
 
     projectNameEl.addEventListener("input", () => {
-      updateWeekLine(week, projectNameEl, projectLanguageEl);
+      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
     });
 
     projectLanguageEl.addEventListener("change", () => {
-      updateWeekLine(week, projectNameEl, projectLanguageEl);
+      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
+    });
+
+    repoUrlEl.addEventListener("input", () => {
+      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
     });
 
     promptBtnEl.addEventListener("click", () => {
       pickOnePrompt(prompts, week - 1);
-      updateWeekLine(week, projectNameEl, projectLanguageEl);
+      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
       updatePromptButton(week);
     });
 
-    updateWeekLine(week, projectNameEl, projectLanguageEl);
+    updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
   }
 }
 
