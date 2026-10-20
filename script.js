@@ -30,6 +30,8 @@ function pickOnePrompt(prompts, index) {
 
   currentPrompts[index] = replacementPrompt;
 
+  weeks[index].prompt = replacementPrompt;
+
   return currentPrompts;
 }
 
@@ -81,8 +83,8 @@ function createWeeks() {
     const week = {
       number: i,
       prompt: currentPrompts[i - 1],
-      project: "Great project",
-      language: "Cool language",
+      project: "",
+      language: "",
       repo: "Amazing Url",
     };
     weeks.push(week);
@@ -96,12 +98,6 @@ function displayWeeks(weeks) {
   });
 }
 
-function displayWeekLine(weekNumber, projectName, projectLanguage, projectUrl) {
-  const weekLine = `Week ${weekNumber} - ${currentPrompts[weekNumber - 1]} - ${projectName} - ${projectLanguage} - ${projectUrl}`;
-  const weekLineEl = document.getElementById(`week-line-${weekNumber}`);
-  weekLineEl.textContent = weekLine;
-}
-
 function getDisplayedProjectName(projectName) {
   const trimmedProjectName = projectName.trim();
   return trimmedProjectName === "" ? "Project name..." : projectName;
@@ -112,11 +108,12 @@ function getRepoUrl(repoUrl) {
   return trimmedRepoUrl === "" ? "Repo url..." : repoUrl;
 }
 
-function updateWeekLine(weekNumber, projectNameEl, projectLanguageEl, repoUrlEl) {
-  let projectName = getDisplayedProjectName(projectNameEl.value);
-  let projectLanguage = projectLanguageEl.value;
-  let repoUrl = getRepoUrl(repoUrlEl.value);
-  displayWeekLine(weekNumber, projectName, projectLanguage, repoUrl);
+function updateWeek(weekNumber, projectNameEl, projectLanguageEl, repoUrlEl) {
+  weeks[weekNumber - 1].project = getDisplayedProjectName(projectNameEl.value);
+  weeks[weekNumber - 1].language = projectLanguageEl.value;
+  weeks[weekNumber - 1].repo = getRepoUrl(repoUrlEl.value);
+
+  displayWeeks(weeks);
 }
 
 function updatePromptButton(week) {
@@ -132,24 +129,24 @@ function updateCard() {
     const promptBtnEl = document.getElementById(`prompt-btn-${week}`);
 
     projectNameEl.addEventListener("input", () => {
-      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
+      updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
     });
 
     projectLanguageEl.addEventListener("change", () => {
-      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
+      updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
     });
 
     repoUrlEl.addEventListener("input", () => {
-      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
+      updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
     });
 
     promptBtnEl.addEventListener("click", () => {
       pickOnePrompt(prompts, week - 1);
-      updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
+      updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
       updatePromptButton(week);
     });
 
-    updateWeekLine(week, projectNameEl, projectLanguageEl, repoUrlEl);
+    updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
   }
 }
 
@@ -163,4 +160,4 @@ renderCard();
 displayWeeks(weeks);
 
 // 2 - Update
-// updateCard();
+updateCard();
