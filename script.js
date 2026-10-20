@@ -1,40 +1,27 @@
 // Prompts
 const prompts = ["Moon", "Ghost", "Candy", "Witch", "Pumpkin", "Bat", "Broom", "Spice", "Night", "Cat"];
-let currentPrompts = [];
 
 function pickPrompt(prompts) {
   let index = Math.floor(Math.random() * prompts.length);
   return prompts[index];
 }
 
-function pickAllPrompts(prompts) {
-  for (let week = 1; week <= 4; week++) {
-    let currentPrompt = pickPrompt(prompts);
-
-    while (currentPrompts.includes(currentPrompt)) {
-      currentPrompt = pickPrompt(prompts);
-    }
-
-    currentPrompts.push(currentPrompt);
+function pickWeekPrompt(prompts) {
+  let currentPrompts = [];
+  for (let i = 0; i < weeks.length; i++) {
+    currentPrompts.push(weeks[i].prompt);
   }
 
-  return currentPrompts;
-}
-
-function pickOnePrompt(prompts, index) {
   let replacementPrompt = pickPrompt(prompts);
 
   while (currentPrompts.includes(replacementPrompt)) {
     replacementPrompt = pickPrompt(prompts);
   }
 
-  currentPrompts[index] = replacementPrompt;
-
-  weeks[index].prompt = replacementPrompt;
-
-  return currentPrompts;
+  return replacementPrompt;
 }
 
+// Renders
 function renderForm() {
   let fullForm = "";
   for (let week = 1; week <= 4; week++) {
@@ -42,7 +29,7 @@ function renderForm() {
         <div id="week-form-${week}" class="border-2 border-solid p-2 my-8">
             <div class="flex flex-row justify-between">
                 <h2>Week ${week}</h2>
-                <button id="prompt-btn-${week}" type="button">🎲 ${currentPrompts[week - 1]}</button>
+                <button id="prompt-btn-${week}" type="button">🎲 ${weeks[week - 1].prompt}</button>
             </div>
 
             <div class="flex flex-row my-2 gap-8 ">
@@ -79,13 +66,13 @@ function renderCard() {
 let weeks = [];
 
 function createWeeks() {
-  for (let i = 1; i <= 4; i++) {
+  for (let weekNumber = 1; weekNumber <= 4; weekNumber++) {
     const week = {
-      number: i,
-      prompt: currentPrompts[i - 1],
+      number: weekNumber,
+      prompt: pickWeekPrompt(prompts),
       project: "",
       language: "",
-      repo: "Amazing Url",
+      repo: "",
     };
     weeks.push(week);
   }
@@ -118,7 +105,7 @@ function updateWeek(weekNumber, projectNameEl, projectLanguageEl, repoUrlEl) {
 
 function updatePromptButton(week) {
   const promptBtnEl = document.getElementById(`prompt-btn-${week}`);
-  promptBtnEl.textContent = "🎲 " + currentPrompts[week - 1];
+  promptBtnEl.textContent = "🎲 " + weeks[week - 1].prompt;
 }
 
 function updateCard() {
@@ -141,7 +128,7 @@ function updateCard() {
     });
 
     promptBtnEl.addEventListener("click", () => {
-      pickOnePrompt(prompts, week - 1);
+      weeks[week - 1].prompt = pickWeekPrompt(prompts);
       updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
       updatePromptButton(week);
     });
@@ -151,13 +138,12 @@ function updateCard() {
 }
 
 // First load
-// 1 - render
-pickAllPrompts(prompts);
+// 1 - Create data
 createWeeks();
 
+// 2 - Render
 renderForm();
 renderCard();
-displayWeeks(weeks);
 
-// 2 - Update
+// 3 - Update
 updateCard();
