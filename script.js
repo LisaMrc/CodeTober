@@ -26,15 +26,15 @@ function renderForm() {
   let fullForm = "";
   for (let week = 1; week <= 4; week++) {
     fullForm += `
-        <div id="week-form-${week}" class="border-2 border-solid p-2 my-8">
-            <div class="flex flex-row justify-between">
-                <h2>Week ${week}</h2>
-                <button id="prompt-btn-${week}" type="button">🎲 ${weeks[week - 1].prompt}</button>
+        <div id="week-form-${week}" class="p-2 my-8 bg-block rounded-xl p-3 mb-3">
+            <div class="flex flex-row justify-between m-2">
+                <h2 class="font-bold text-brand">Week ${week}</h2>
+                <button id="prompt-btn-${week}" type="button" class="rounded-full border border-line bg-block px-3 py-1 text-sm">🎲 ${weeks[week - 1].prompt}</button>
             </div>
 
-            <div class="flex flex-row my-2 gap-8 ">
-            <input type="text" id="project-name-input-${week}" class="border-2 border-solid" placeholder="Project name" />
-            <select id="project-language-select-${week}" class="border-2 border-solid">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input type="text" id="project-name-input-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full" placeholder="Project name" />
+            <select id="project-language-select-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full">
                 <option value="Language">Target language</option>
                 <option value="JavaScript">JavaScript</option>
                 <option value="React">React</option>
@@ -42,7 +42,7 @@ function renderForm() {
                 <option value="Tailwind">Tailwind</option>
             </select>
 
-            <input type="text" id="repo-url-input-${week}" class="border-2 border-solid" placeholder="Repo URL" />
+            <input type="text" id="repo-url-input-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full" placeholder="Repo URL" />
             </div>
         </div>
     `;

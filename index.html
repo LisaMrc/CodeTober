@@ -2,24 +2,54 @@
   <meta charset="UTF-8" />
   <title>CodeTober</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: "#ff7518",
+            panel: "#1b1030",
+            block: "#2a1747",
+            line: "#3d2463",
+            muted: "#a190c2",
+            accent: "#a259ff",
+            lime: "#b6ff5c",
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div id="page" class="grid grid-cols-2 gap-4">
-    <form id="form" class="border-2 border-solid m-6 p-6 flex flex-col gap-2">
-      <h1>Your challenge</h1>
+  <div id="page" class="grid grid-cols-2 gap-4 p-4">
+    <form id="form" class="flex flex-col gap-2 bg-panel border border-line rounded-2xl p-4">
+      <h1 class="font-serif text-2xl text-brand text-center font-bold">Your challenge</h1>
 
       <div id="pseudo" class="my-8 flex flex-row">
-        <input type="text" placeholder="your-pseudo" class="border-2 border-solid" />
-        <p>'s 2026 CodeTober challenge</p>
+        <input
+          type="text"
+          placeholder="your-pseudo"
+          class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full"
+        />
+        <p class="w-full">'s 2026 CodeTober challenge</p>
       </div>
 
       <div id="weeks-form"></div>
     </form>
 
-    <div id="card" class="border-2 border-solid m-6 p-6">
-      <h1 class="text-orange-500 font-bold">CodeTober 2026</h1>
-      <div id="weeks-card"></div>
+    <div class="flex flex-col gap-4">
+      <div id="card" class="flex flex-col gap-2 bg-panel border-2 border-dashed border-brand/70 rounded-2xl p-4">
+        <h1 class="font-serif text-2xl text-brand text-center font-bold">🎃 CodeTober</h1>
+        <h2 class="font-mono text-l text-center text-muted sub">4 weeks - 4 prompts - 4 projects</h2>
+        <div id="weeks-card"></div>
+      </div>
+
+      <!-- <div id="card-buttons flex flex-row gap-2 items-stretch">
+        <button class="bg-brand text-white font-bold rounded-full py-3">Copy SVG</button>
+        <button class="bg-brand text-white font-bold rounded-full py-3">Download as PNG</button>
+      </div> -->
     </div>
   </div>
 </body>

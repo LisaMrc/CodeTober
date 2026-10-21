@@ -1,1 +1,11 @@
-s
+body {
+  background: linear-gradient(#8d2352, #4e183e 18%, #261031 40%, #180e2c) fixed;
+  min-height: 100vh;
+  color: #f3ecff;
+}
+
+.sub {
+    font: 14px 'Courier New', monospace;
+    fill: #b9a6d6;
+    letter-spacing: 3px;
+}
