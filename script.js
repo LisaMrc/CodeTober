@@ -26,8 +26,13 @@ let user = {
   name: "",
 };
 
+function getUserName(userName) {
+  const trimmedUserName = userName.trim();
+  return trimmedUserName === "" ? "Your username" : userName;
+}
+
 function updateUserName(usernameEl) {
-  user.name = usernameEl.value;
+  user.name = getUserName(usernameEl.value);
   let cardUsernameEl = document.getElementById(`card-username`);
   cardUsernameEl.textContent = user.name + "'s";
 }
@@ -152,6 +157,7 @@ function updateCard() {
     });
 
     updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
+    updateUserName(usernameEl);
   }
 }
 
