@@ -21,45 +21,15 @@ function pickWeekPrompt(prompts) {
   return replacementPrompt;
 }
 
-// Renders
-function renderForm() {
-  let fullForm = "";
-  for (let week = 1; week <= 4; week++) {
-    fullForm += `
-        <div id="week-form-${week}" class="p-2 my-8 bg-block rounded-xl p-3 mb-3">
-            <div class="flex flex-row justify-between m-2">
-                <h2 class="font-bold text-brand">Week ${week}</h2>
-                <button id="prompt-btn-${week}" type="button" class="rounded-full border border-line bg-block px-3 py-1 text-sm">🎲 ${weeks[week - 1].prompt}</button>
-            </div>
+// User
+let user = {
+  name: "",
+};
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <input type="text" id="project-name-input-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full" placeholder="Project name" />
-            <select id="project-language-select-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full">
-                <option value="Language">Target language</option>
-                <option value="JavaScript">JavaScript</option>
-                <option value="React">React</option>
-                <option value="TypeScript">TypeScript</option>
-                <option value="Tailwind">Tailwind</option>
-            </select>
-
-            <input type="text" id="repo-url-input-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full" placeholder="Repo URL" />
-            </div>
-        </div>
-    `;
-  }
-
-  const formEl = document.getElementById("weeks-form");
-  formEl.innerHTML = fullForm;
-}
-
-function renderCard() {
-  let fullCard = "";
-  for (let week = 1; week <= 4; week++) {
-    fullCard += `<p id="week-line-${week}"></p>`;
-  }
-
-  const cardEl = document.getElementById("weeks-card");
-  cardEl.innerHTML = fullCard;
+function updateUserName(usernameEl) {
+  user.name = usernameEl.value;
+  let cardUsernameEl = document.getElementById(`card-username`);
+  cardUsernameEl.textContent = user.name + "'s";
 }
 
 // Weeks
@@ -108,12 +78,56 @@ function updatePromptButton(week) {
   promptBtnEl.textContent = "🎲 " + weeks[week - 1].prompt;
 }
 
+// Renders
+function renderForm() {
+  let fullForm = "";
+  for (let week = 1; week <= 4; week++) {
+    fullForm += `
+        <div id="week-form-${week}" class="p-2 my-8 bg-block rounded-xl">
+            <div class="flex flex-row justify-between m-2">
+                <h2 class="font-bold text-brand">Week ${week}</h2>
+                <button id="prompt-btn-${week}" type="button" class="rounded-full border border-line bg-block px-3 py-1 text-sm">🎲 ${weeks[week - 1].prompt}</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input type="text" id="project-name-input-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full" placeholder="Project name" />
+            <select id="project-language-select-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full">
+                <option value="Language">Target language</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="React">React</option>
+                <option value="TypeScript">TypeScript</option>
+                <option value="Tailwind">Tailwind</option>
+            </select>
+
+            <input type="text" id="repo-url-input-${week}" class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full" placeholder="Repo URL" />
+            </div>
+        </div>
+    `;
+  }
+
+  const formEl = document.getElementById("weeks-form");
+  formEl.innerHTML = fullForm;
+}
+
+function renderCard() {
+  let fullCard = "";
+  for (let week = 1; week <= 4; week++) {
+    fullCard += `<p id="week-line-${week}"></p>`;
+  }
+
+  const cardEl = document.getElementById("weeks-card");
+  cardEl.innerHTML = fullCard;
+}
+
+// Update
+
 function updateCard() {
   for (let week = 1; week <= 4; week++) {
     const projectNameEl = document.getElementById(`project-name-input-${week}`);
     const projectLanguageEl = document.getElementById(`project-language-select-${week}`);
     const repoUrlEl = document.getElementById(`repo-url-input-${week}`);
     const promptBtnEl = document.getElementById(`prompt-btn-${week}`);
+    const usernameEl = document.getElementById(`username-input`);
 
     projectNameEl.addEventListener("input", () => {
       updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
@@ -131,6 +145,10 @@ function updateCard() {
       weeks[week - 1].prompt = pickWeekPrompt(prompts);
       updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);
       updatePromptButton(week);
+    });
+
+    usernameEl.addEventListener("input", () => {
+      updateUserName(usernameEl);
     });
 
     updateWeek(week, projectNameEl, projectLanguageEl, repoUrlEl);

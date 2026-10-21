@@ -23,14 +23,15 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div id="page" class="grid grid-cols-2 gap-4 p-4">
-    <form id="form" class="flex flex-col gap-2 bg-panel border border-line rounded-2xl p-4">
-      <h1 class="font-serif text-2xl text-brand text-center font-bold">Your challenge</h1>
+  <div id="page" class="grid grid-cols-2 gap-2 p-4">
+    <form id="form" class="flex flex-col bg-panel border border-line rounded-2xl p-4">
+      <h1 class="font-serif text-2xl text-brand text-center font-bold">Build your challenge</h1>
 
-      <div id="pseudo" class="my-8 flex flex-row">
+      <div class="my-4 flex flex-row">
         <input
+          id="username-input"
           type="text"
-          placeholder="your-pseudo"
+          placeholder="your-username"
           class="bg-[#0d0718] border border-line rounded-lg px-3 py-2 text-sm w-full"
         />
         <p class="w-full">'s 2026 CodeTober challenge</p>
@@ -41,8 +42,9 @@
 
     <div class="flex flex-col gap-4">
       <div id="card" class="flex flex-col gap-2 bg-panel border-2 border-dashed border-brand/70 rounded-2xl p-4">
-        <h1 class="font-serif text-2xl text-brand text-center font-bold">🎃 CodeTober</h1>
-        <h2 class="font-mono text-l text-center text-muted sub">4 weeks - 4 prompts - 4 projects</h2>
+        <h2 id="card-username" class="font-mono text-l text-center text-muted sub">Your username's</h2>
+        <h1 class="font-serif text-2xl text-brand text-center font-bold">🎃 CodeTober 2026</h1>
+        <h2 class="font-mono text-l text-center text-muted sub my-2">4 weeks - 4 prompts - 4 projects</h2>
         <div id="weeks-card"></div>
       </div>
 
