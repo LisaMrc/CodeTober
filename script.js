@@ -55,12 +55,13 @@ function createWeeks() {
 
 function displayWeeks(weeks) {
   weeks.forEach((week, index) => {
+    let langColor = getLangColor(week.language);
     let weekLineBlock = `
         <tr>
             <th>Week ${week.number}</th>
             <td>${week.prompt}</td>
             <td>${week.project}</td>
-            <td>${week.language}</td>
+            <td style="color: ${langColor}">${week.language}</td>
             <td>${week.repo}</td>
         </tr>
     `;
