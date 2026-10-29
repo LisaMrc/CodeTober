@@ -83,6 +83,30 @@ function updatePromptButton(week) {
   promptBtnEl.textContent = "🎲 " + weeks[week - 1].prompt;
 }
 
+// Colors
+const langColors = {
+  JavaScript: "#f7df1eaa",
+  TypeScript: "#3178c6aa",
+  Python: "#3776abaa",
+  Java: "#e76f00aa",
+  C: "#00599caa",
+  "C++": "#00599caa",
+  "C#": "#68217aaa",
+  PHP: "#777bb4aa",
+  HTML: "#e34f26aa",
+  CSS: "#1572b6aa",
+  React: "#61dafbaa",
+  Tailwind: "#06b6d4aa",
+  Vue: "#42b883aa",
+  Angular: "#dd0031aa",
+  "Next.js": "#000000aa",
+  "Node.js": "#339933aa",
+};
+
+function getLangColor(lang) {
+    return langColors[lang] !== undefined ? langColors[lang] : "#808080aa";
+}
+
 // Renders
 function renderForm() {
   let fullForm = "";
