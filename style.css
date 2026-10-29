@@ -21,7 +21,7 @@ body {
 /* Cells*/
 #weeks-card td,
 #weeks-card tbody {
-  padding: 14px 16px;
+  padding: 14px 1px;
   vertical-align: middle;
 }
 
