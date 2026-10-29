@@ -9,3 +9,32 @@ body {
     fill: #b9a6d6;
     letter-spacing: 3px;
 }
+
+#weeks-card table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* gap vertical de 10px */
+  border: none;
+  background: transparent;
+}
+
+/* Cells*/
+#weeks-card td,
+#weeks-card tbody {
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+/* Week colors change */
+#weeks-card tbody tr:nth-child(odd) {
+  background-color: #211332;
+}
+#weeks-card tbody tr:nth-child(even) {
+  background-color: #2b1940;
+}
+
+#weeks-card tbody th {
+  color: #ff9a35;
+  font-weight: 700;
+  white-space: nowrap;
+}

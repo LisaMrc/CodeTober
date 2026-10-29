@@ -55,8 +55,18 @@ function createWeeks() {
 
 function displayWeeks(weeks) {
   weeks.forEach((week, index) => {
+    let weekLineBlock = `
+        <tr>
+            <th>Week ${week.number}</th>
+            <td>${week.prompt}</td>
+            <td>${week.project}</td>
+            <td>${week.language}</td>
+            <td>${week.repo}</td>
+        </tr>
+    `;
+
     const weekLineEl = document.getElementById(`week-line-${index + 1}`);
-    weekLineEl.textContent = `${week.number} - ${week.prompt} - ${week.project} - ${week.language} - ${week.repo}`;
+    weekLineEl.innerHTML = weekLineBlock;
   });
 }
 
@@ -104,7 +114,7 @@ const langColors = {
 };
 
 function getLangColor(lang) {
-    return langColors[lang] !== undefined ? langColors[lang] : "#808080aa";
+  return langColors[lang] !== undefined ? langColors[lang] : "#808080aa";
 }
 
 // Renders
@@ -139,10 +149,28 @@ function renderForm() {
 }
 
 function renderCard() {
-  let fullCard = "";
+  let fullCard = `
+    <table>
+      <thead class="p-2">
+        <tr class="font-mono text-l text-left text-muted sub my-2 uppercase">
+          <th>Week</th>
+          <th>Prompt</th>
+          <th>Project</th>
+          <th>Language</th>
+          <th>Repository</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
   for (let week = 1; week <= 4; week++) {
-    fullCard += `<p id="week-line-${week}"></p>`;
+    fullCard += `<tr id="week-line-${week}"></tr>`;
   }
+
+  fullCard += `
+      </tbody>
+    </table>
+  `;
 
   const cardEl = document.getElementById("weeks-card");
   cardEl.innerHTML = fullCard;
