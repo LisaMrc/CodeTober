@@ -62,7 +62,7 @@ function displayWeeks(weeks) {
             <td>${week.prompt}</td>
             <td>${week.project}</td>
             <td style="color: ${langColor}">${week.language}</td>
-            <td>${week.repo}</td>
+            <td class="text-lime">🔗 ${week.repo}</td>
         </tr>
     `;
 
