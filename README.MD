@@ -2,7 +2,9 @@
 
 Inspiré par le célèbre Inktober, CodeTober est un challenge qui consiste à réaliser un projet de code par semaine à partir d'un prompt sur le thème d'Halloween. 🦇
 
-Ce site permet de générer une carte personnalisée récapitulant les prompts, les projets, les langages utilisés et les liens vers les dépôts GitHub associés. La carte est destinée à être exportée au format SVG pour être partagée ou affichée sur GitHub.
+Ce site permet de générer une carte personnalisée récapitulant les prompts, les projets, les langages utilisés et les liens vers les repo GitHub associés. La carte est destinée à être exportée au format SVG pour être partagée.
+
+![Exemple de carte CodeTober](./images/codetober-2026-card-preview.png)
 
 ## 🕷️ Fonctionnalités
 - Carte dynamique mise à jour selon les informations saisies
