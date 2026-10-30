@@ -57,13 +57,13 @@ const langColors = {
   "Node.js": "#339933aa",
 };
 
-function getLangColor(lang) {
+const getLangColor = (lang) => {
   return langColors[lang] !== undefined ? langColors[lang] : "#808080aa";
-}
+};
 
-function truncate(text, maxLength) {
-    return text.substring(0, Math.min(maxLength, text.length));
-}
+const truncate = (text, maxLength) => {
+  return text.substring(0, Math.min(maxLength, text.length));
+};
 
 // Weeks
 let weeks = [];
@@ -123,7 +123,7 @@ function updatePromptButton(week) {
 }
 
 // Renders
-function renderForm() {
+const renderForm = () => {
   let fullForm = "";
   for (let week = 1; week <= 4; week++) {
     fullForm += `
@@ -153,7 +153,7 @@ function renderForm() {
   formEl.innerHTML = fullForm;
 }
 
-function renderCard() {
+const renderCard = () => {
   let fullCard = `
     <table>
       <thead class="p-2">
@@ -179,7 +179,7 @@ function renderCard() {
 
   const cardEl = document.getElementById("weeks-card");
   cardEl.innerHTML = fullCard;
-}
+};
 
 // Update
 
