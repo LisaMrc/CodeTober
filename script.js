@@ -85,12 +85,13 @@ function createWeeks() {
 function displayWeeks() {
   weeks.forEach((week, index) => {
     let langColor = getLangColor(week.language);
+    const badge = gooeyBadge(langColor, week.language);
     let weekLineBlock = `
         <tr>
             <th>Week ${week.number}</th>
             <td>${week.prompt}</td>
             <td>${week.project}</td>
-            <td style="color: ${langColor}">${week.language}</td>
+            <td>${badge}</td>
             <td class="text-lime">🔗 <a href="${week.repo}">${truncate(week.repo, 11)}</a></td>
         </tr>
     `;

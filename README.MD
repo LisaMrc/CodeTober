@@ -4,7 +4,7 @@ Inspiré par le célèbre Inktober, CodeTober est un challenge qui consiste à r
 
 Ce site permet de générer une carte personnalisée récapitulant les prompts, les projets, les langages utilisés et les liens vers les repo GitHub associés. La carte est destinée à être exportée au format SVG pour être partagée.
 
-![Exemple de carte CodeTober](./images/codetober-2026-card-preview.png)
+![Exemple de carte CodeTober](./images/codetober-2026-card-preview.svg)
 
 ## 🕷️ Fonctionnalités
 - Carte dynamique mise à jour selon les informations saisies
