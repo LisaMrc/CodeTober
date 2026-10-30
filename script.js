@@ -227,3 +227,32 @@ renderCard();
 
 // 3 - Update
 updateCard();
+
+// 4 - Download
+async function downloadCardAsPNG() {
+  const card = document.getElementById("card");
+
+  const canvas = await html2canvas(card, {
+    scale: 2,
+    backgroundColor: null,
+    useCORS: true,
+  });
+
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "codetober-2026.png";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+  }, "image/png");
+}
+
+const downloadButton = document.getElementById("download-png");
+
+downloadButton.addEventListener("click", downloadCardAsPNG);

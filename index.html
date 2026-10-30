@@ -1,6 +1,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>CodeTober</title>
+
+  <!-- Tailwind & CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -20,6 +22,11 @@
     };
   </script>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Libs -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+
+  <!-- JS -->
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -48,9 +55,13 @@
         <div id="weeks-card"></div>
       </div>
 
-      <div class="flex flex-row gap-2 w-full justify-center ">
-        <button class="bg-brand text-white font-bold rounded-full p-3">Download as PNG</button>
-                <button class="bg-brand text-white font-bold rounded-full p-3">Copy SVG</button>
+      <div class="flex flex-row gap-2 w-full justify-center">
+        <button id="download-png" type="button" class="bg-brand text-white font-bold rounded-full p-3">
+          Download as PNG (static)
+        </button>
+        <button id="download-svg" type="button" class="bg-brand text-white font-bold rounded-full p-3">
+          Download as SVG (animated)
+        </button>
       </div>
     </div>
   </div>
