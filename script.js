@@ -68,20 +68,19 @@ const truncate = (text, maxLength) => {
 // Weeks
 let weeks = [];
 
-function createWeeks() {
-  for (let weekNumber = 1; weekNumber <= 4; weekNumber++) {
-    const week = {
+const createWeeks = () => {
+  weeks = [1, 2, 3, 4].map((weekNumber) => {
+    return {
       number: weekNumber,
       prompt: pickWeekPrompt(prompts),
       project: "",
       language: "",
       repo: "",
     };
-    weeks.push(week);
-  }
-}
+  });
+};
 
-function displayWeeks(weeks) {
+function displayWeeks() {
   weeks.forEach((week, index) => {
     let langColor = getLangColor(week.language);
     let weekLineBlock = `
@@ -151,9 +150,15 @@ const renderForm = () => {
 
   const formEl = document.getElementById("weeks-form");
   formEl.innerHTML = fullForm;
-}
+};
 
 const renderCard = () => {
+  const weekLines = weeks
+    .map((week) => {
+      return `<tr id="week-line-${week.number}"></tr>`;
+    })
+    .join("");
+
   let fullCard = `
     <table>
       <thead class="p-2">
@@ -166,13 +171,7 @@ const renderCard = () => {
         </tr>
       </thead>
       <tbody>
-  `;
-
-  for (let week = 1; week <= 4; week++) {
-    fullCard += `<tr id="week-line-${week}"></tr>`;
-  }
-
-  fullCard += `
+        ${weekLines}
       </tbody>
     </table>
   `;
