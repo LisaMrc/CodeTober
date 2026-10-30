@@ -254,5 +254,19 @@ async function downloadCardAsPNG() {
 }
 
 const downloadButton = document.getElementById("download-png");
-
 downloadButton.addEventListener("click", downloadCardAsPNG);
+
+async function downloadCardAsSVG() {
+  const card = document.getElementById("card");
+
+  const dataUrl = await htmlToImage.toSvg(card);
+
+  const link = document.createElement("a");
+  link.href = dataUrl;
+  link.download = "codetober-2026.svg";
+
+  link.click();
+}
+
+const downloadSVGButton = document.getElementById("download-svg");
+downloadSVGButton.addEventListener("click", downloadCardAsSVG);
