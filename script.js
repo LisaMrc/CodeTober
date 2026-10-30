@@ -8,6 +8,7 @@ function pickPrompt(prompts) {
 
 function pickWeekPrompt(prompts) {
   let currentPrompts = [];
+
   for (let i = 0; i < weeks.length; i++) {
     currentPrompts.push(weeks[i].prompt);
   }
@@ -15,7 +16,7 @@ function pickWeekPrompt(prompts) {
   let replacementPrompt = pickPrompt(prompts);
 
   while (currentPrompts.includes(replacementPrompt)) {
-    replacementPrompt = pickPrompt(prompts);
+    replacementPrompt = pickPrompt();
   }
 
   return replacementPrompt;
@@ -68,17 +69,18 @@ const truncate = (text, maxLength) => {
 // Weeks
 let weeks = [];
 
-const createWeeks = () => {
-  weeks = [1, 2, 3, 4].map((weekNumber) => {
-    return {
+function createWeeks() {
+  for (let weekNumber = 1; weekNumber <= 4; weekNumber++) {
+    const week = {
       number: weekNumber,
       prompt: pickWeekPrompt(prompts),
       project: "",
       language: "",
       repo: "",
     };
-  });
-};
+    weeks.push(week);
+  }
+}
 
 function displayWeeks() {
   weeks.forEach((week, index) => {
